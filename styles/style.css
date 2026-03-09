@@ -9,8 +9,446 @@
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 
 */
+@supports (font-variation-settings: normal) {
+  .page {
+    font-family: var(--font-primary), sans-serif;
+  }
+
+  .header,
+  .header__text,
+  .like-icon,
+  .button__text {
+    font-family: var(--font-game), fantasy;
+  }
+}
 
 .page {
+  background-size: cover;
+  font-size: var(--base-font-size);
+  inline-size: 100%;
+  background-attachment: fixed;
   min-inline-size: 320px;
-  min-block-size: 100dvb;
+  font-variation-settings: "wght" var(--regular-weight, 400);
+  background-image: var(
+    --texture-background,
+    repeating-linear-gradient(
+      to bottom,
+      #d3d3d3 0 2px,
+      rgb(211 211 211 / 0) 2px 4px
+    ),
+    repeating-linear-gradient(
+      to right,
+      #d3d3d3 0 2px,
+      rgb(211 211 211 / 0) 2px 4px
+    ),
+    linear-gradient(to bottom, #e7e7e7, #e7e7e7 0.01%, #1a1a1a 100%)
+  );
+}
+
+.header {
+  padding-block-end: var(--header-spacing);
+  padding-block-start: var(--header-spacing);
+}
+
+.header_section {
+  padding-block-end: clamp(7.5rem, 7.3239rem + 0.7512vw, 8rem);
+  padding-block-start: clamp(7.5rem, 7.3239rem + 0.7512vw, 8rem);
+}
+
+.header_section,
+.save {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.header_section,
+.card_section {
+  border: var(--border-outline);
+  flex-direction: column;
+  background-color: var(--page-background);
+}
+
+.header__logo,
+.header__text,
+.dialog-content {
+  align-self: center;
+  text-transform: uppercase;
+}
+
+.button__text {
+  color: var(--inverted-text);
+  font-size: 0.875rem;
+  line-height: var(--button-line-height);
+  align-items: center;
+}
+
+.header__logo {
+  line-height: 1;
+  font-variation-settings: "wght" var(--regular-weight, 400);
+  font-size: clamp(3.063rem, 2.7109rem + 1.5023vw, 4.063rem);
+}
+
+.header__text {
+  font-size: clamp(0.875rem, 0.6768rem + 0.8458vw, 1.438rem);
+  margin-top: 20px;
+}
+
+/* не пойму в этом селекторе в чем ошибка размеров контейнеров, каждая последующая карточка сьезжает */
+.card_block {
+  position: relative;
+}
+
+.card_container {
+  flex-direction: column;
+  gap: var(--card-gap);
+  max-inline-size: 100%;
+  display: flex;
+}
+
+.card_title {
+  padding-inline: 10px;
+  font-variation-settings: "wght" var(--bold-weight, 700);
+  padding-block-end: 6px;
+  padding-block-start: 4px;
+  border-bottom: var(--border-outline);
+  font-size: inherit;
+}
+
+.card__img {
+  aspect-ratio: 1 / 1;
+  inline-size: 100%;
+  object-fit: cover;
+  display: block;
+  object-position: center center;
+}
+
+.mono-filter img {
+  filter: grayscale(0.7);
+}
+
+.filter-opacity img {
+  filter: opacity(0.8);
+}
+
+.blend-filter img {
+  filter: invert(0.7) contrast(1) brightness(100%);
+}
+
+.visual-contrast img {
+  filter: contrast(20%);
+}
+
+.visual-invert img {
+  filter: invert(0.7);
+}
+
+.visual-sepia img {
+  filter: sepia(80%);
+}
+
+.visual-blur img {
+  filter: blur(0.2rem);
+}
+
+.visual-rotate img {
+  filter: hue-rotate(0.5turn);
+}
+
+.watermark {
+  position: absolute;
+  font-size: 0.875rem;
+  mix-blend-mode: hard-light;
+  font-family: var(--font-game), var(--ui-font);
+  inset-block-start: clamp(1.5rem, 1.4778rem + 0.0946vw, 1.563rem);
+  inset-inline-end: clamp(0.75rem, 0.4859rem + +1.1268vw, 1.5rem);
+  opacity: 50%;
+  text-shadow:
+    -1px 0 var(--page-background),
+    0 1px var(--page-background),
+    1px 0 var(--page-background),
+    0 -1px var(--page-background);
+  z-index: 1;
+}
+
+@supports (
+  (text-stroke: 1px var(--page-background)) or
+    (-webkit-text-stroke: 1px var(--page-background))
+) {
+  .watermark {
+    text-shadow: none;
+    -webkit-text-stroke: 1px var(--page-background);
+    text-stroke: 1px var(--page-background);
+  }
+}
+
+.visual-blur label {
+  text-wrap: nowrap;
+}
+
+.card_content {
+  line-height: var(--body-line-height);
+  padding: var(--content-padding);
+  border-block-start: var(--border-outline);
+}
+
+.text:not(:last-child) {
+  margin-block-end: var(--section-margin);
+}
+
+.button_container {
+  align-content: center;
+  column-gap: 8px;
+  justify-content: flex-end;
+  margin-block-end: 25px;
+  margin-inline-end: 25px;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card__icon-button {
+  align-content: center;
+  background-color: transparent;
+  border: 0;
+  flex-wrap: wrap;
+  height: 38px;
+  justify-content: center;
+  outline: 0;
+  padding: 0;
+  transition: border 0.3s ease;
+  align-items: center;
+  display: flex;
+  width: 39px;
+}
+
+svg.like-icon {
+  align-content: center;
+  align-items: center;
+  display: grid;
+  justify-content: center;
+  outline: 0;
+  position: relative;
+}
+
+.card__like-button {
+  align-content: center;
+  align-items: center;
+  block-size: 38px;
+  border: var(--border-outline);
+  display: flex;
+  flex-wrap: wrap;
+  inline-size: 130px;
+  justify-content: center;
+}
+
+.save {
+  border: var(--border-outline);
+  gap: 8px;
+  margin: auto;
+  margin-bottom: 100px;
+  margin-top: 52px;
+  padding-block-end: 15px;
+  padding-block-start: 15px;
+  padding-inline-end: 20px;
+  padding-inline-start: 20px;
+  text-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.button {
+  transition: box-shadow 0.33s ease;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  box-shadow: var(--focus-shadow);
+}
+
+.card__icon-button:focus {
+  outline: 0;
+}
+
+.card__icon-button:focus-visible {
+  border: 2px solid #000;
+}
+
+.button {
+  overflow: hidden;
+  position: relative;
+  background-color: var(--page-background);
+}
+
+.button::before {
+  background-color: var(--highlight-color);
+  content: "";
+  inset: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease-in-out;
+}
+
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+.diskette {
+  width: 28px;
+}
+
+.button__text,
+.diskette,
+.diskette-dialog {
+  mix-blend-mode: difference;
+  position: relative;
+  z-index: 2;
+}
+
+.diskette-dialog {
+  width: 39px;
+  fill: rgb(256, 256, 256);
+}
+
+.like-icon:hover .content-body {
+  fill: var(--heart-outline);
+  transition: fill 0.3s 0.05s linear;
+}
+
+.like-icon:hover .cross {
+  fill: var(--heart-outline);
+  transition: fill 0.3s linear;
+}
+
+.like-icon:active .content-body {
+  fill: var(--heart-fill);
+  transition: fill fill 0.3s 0.05s linear;
+}
+
+.like-icon:active .cross {
+  fill: var(--heart-fill);
+  transition: fill 0.3s linear;
+}
+
+.like-icon.is-liked .cross {
+  fill: var(--heart-fill);
+  transition: fill 0.3s linear;
+}
+
+.like-icon.is-liked .content-body {
+  fill: var(--heart-fill);
+  transition: fill 0.3s 0.05s linear;
+}
+
+.like-icon.is-liked .outline {
+  fill: var(--heart-fill);
+  transition: fill 0.3s 0.06s linear;
+}
+
+.like-icon .outline {
+  fill: var(--heart-outline);
+  transition: fill 0.1s linear;
+}
+
+.like-icon .content-body {
+  fill: transparent;
+  transition: fill 0.3s linear;
+}
+
+.is-liked .heart {
+  animation: heart 0.3s 0.1s ease-in;
+  animation-direction: normal;
+  transform-origin: center;
+}
+
+.glimmers {
+  fill: var(--heart-fill);
+  opacity: 0;
+}
+
+.like-icon.is-liked .glimmers {
+  animation: glimmers 0.3s 0.3s ease-in;
+  animation-direction: normal;
+  transform-origin: center;
+}
+
+dialog:not([open]) {
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+}
+
+.dialog {
+  border: 0;
+  display: grid;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  max-inline-size: min-content;
+  outline: var(--border-outline);
+  padding-block-end: 31px;
+  padding-block-start: 31px;
+  padding-inline-end: 42px;
+  padding-inline-start: 42px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.content-dialog {
+  display: flex;
+  gap: 20px;
+}
+
+dialog::backdrop {
+  -webkit-backdrop-filter: brightness(25%);
+  backdrop-filter: brightness(25%);
+}
+
+.dialog-content {
+  line-height: var(--dialog-line-height);
+  text-wrap: wrap;
+}
+
+.dialog-button {
+  align-items: center;
+  block-size: 38px;
+  border: var(--border-outline);
+  min-inline-size: 257px;
+  padding: 9px 17px;
+}
+
+@media (width >= 376px) {
+  .page {
+    max-inline-size: 700px;
+  }
+
+  .save {
+    flex-direction: row;
+    white-space: nowrap;
+  }
+
+  svg.diskette {
+    width: 21px;
+    fill: rgb(256, 256, 256);
+  }
+
+  .dialog {
+    padding-inline-end: 32px;
+    padding-inline-start: 32px;
+  }
+
+  .dialog-button {
+    min-inline-size: 293px;
+  }
 }
