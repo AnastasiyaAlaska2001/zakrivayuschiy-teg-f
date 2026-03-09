@@ -308,6 +308,10 @@ svg {
   width: 28px;
 }
 
+svg.diskette {
+  fill: rgb(256, 256, 256);
+}
+
 .button__text,
 .diskette,
 .diskette-dialog {
@@ -440,7 +444,6 @@ dialog::backdrop {
 
   svg.diskette {
     width: 21px;
-    fill: rgb(256, 256, 256);
   }
 
   .dialog {
